@@ -1,0 +1,101 @@
+[project]
+name = "legal-rag-system"
+version = "0.1.0"
+description = "Sistema RAG especializado para livros e documentos jurídicos"
+authors = [
+    {name = "Seu Nome", email = "seu.email@exemplo.com"}
+]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = ["rag", "legal", "ai", "nlp", "law", "direito"]
+
+dependencies = [
+    # Processamento de PDF
+    "pypdf>=4.0.0",
+
+    # Ollama para Embeddings e LLM
+    "ollama>=0.1.0",
+
+    # PostgreSQL + pgvector + LangChain
+    "langchain-postgres>=0.0.16",
+    "langchain-ollama>=0.1.0",
+    "langchain-community>=0.3.0",
+    "psycopg>=3.0.0",
+    "sqlalchemy[asyncio]>=2.0.0",
+
+    # APIs e servidor web
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "python-multipart>=0.0.6",
+
+    # Configuração e utilitários
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "httpx>=0.26.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+    "pre-commit>=3.0.0",
+]
+
+database = [
+    "psycopg>=3.0.0",
+    "sqlalchemy[asyncio]>=2.0.0",
+]
+
+docker = [
+    "python-dotenv>=1.0.0",
+    "httpx>=0.26.0",
+]
+
+evaluation = [
+    "ragas>=0.0.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/seu-usuario/legal-rag-system"
+"Documentation" = "https://github.com/seu-usuario/legal-rag-system/docs"
+"Repository" = "https://github.com/seu-usuario/legal-rag-system.git"
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--verbose --color=yes"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
